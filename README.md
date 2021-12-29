@@ -85,6 +85,41 @@
 
 ### Configure auto-shutdown of inactive kernels
 1. download script 
+    ```
+    wget https://raw.githubusercontent.com/aws-samples/sagemaker-studio-lifecycle-config-examples/main/scripts/install-autoshutdown- extension/on-jupyter-server-start.sh 
+    ```
+2. transform it to base64 
+    ```
+    LCC_CONTENT=`openssl base64 -A -in on-jupyter-server-start.sh` 
+    ```
+3. create lifecycle configuration 
+    ```
+    aws sagemaker create-studio-lifecycle-config \
+    --studio-lifecycle-config-name install-autoshutdown-extension \
+    --studio-lifecycle-config-content $LCC_CONTENT \
+    --studio-lifecycle-config-app-type JupyterServer
+    ```
+4. get config_arn
+    ```
+    config_arn=`aws sagemaker describe-studio-lifecycle-config --studio-lifecycle-config-name install-autoshutdown-extension | jq -r ".StudioLifecycleConfigArn"`
+    ```
+5. Associate configuration with a domain 
+    ```
+    aws sagemaker update-domain --domain-id $domain_id \
+     --default-user-settings "{ \"JupyterServerAppSettings\": 
+    { \"DefaultResourceSpec\": 
+        { \"LifecycleConfigArn\": \"$config_arn\", 
+          \"InstanceType\": \"system\" }, 
+          \"LifecycleConfigArns\": [ \"$config_arn\" ] 
+    }}"
+    ``` 
+6. Validate the result 
+    1. create a new user 
+    2. adjust idle time uppor limit to 5 minutes 
+    3. create a notebook 
+    4. wait for 5 minutes 
+    5. check cloudwatch log 
+
 
 
       
