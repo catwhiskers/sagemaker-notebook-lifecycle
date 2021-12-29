@@ -86,7 +86,7 @@
 ### Configure auto-shutdown of inactive kernels
 1. download script 
     ```
-    wget https://raw.githubusercontent.com/aws-samples/sagemaker-studio-lifecycle-config-examples/main/scripts/install-autoshutdown- extension/on-jupyter-server-start.sh 
+    wget https://raw.githubusercontent.com/aws-samples/sagemaker-studio-lifecycle-config-examples/main/scripts/install-autoshutdown-extension/on-jupyter-server-start.sh 
     ```
 2. transform it to base64 
     ```
