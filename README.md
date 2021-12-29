@@ -120,6 +120,10 @@
     4. wait for 5 minutes 
     5. check cloudwatch log 
 
-
+### SageMaker Notebook Instance Lifecycle 
+1. well-written lifecycle [scripts](https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples)
+2. reference to this [script](https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/tree/master/scripts/auto-stop-idle)
+3. Edit notebook instance lifecycle configuration 
+4. associate the configuration to a notebook instance
 
       
